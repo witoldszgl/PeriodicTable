@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Edit element</h2>
+<div mat-dialog-content class="edit-dialog-content">
+  <mat-form-field appearance="fill">
+    <mat-label>Number</mat-label>
+    <input matInput [(ngModel)]="data.position" type="number" min="1" #position="ngModel" required />
+    <mat-error *ngIf="position.errors?.['min']">
+      Number cannot be less than 1.
+    </mat-error>
+    <mat-error *ngIf="position.errors?.['required']">
+      Number is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.name" #name="ngModel" required />
+    <mat-error *ngIf="name.errors?.['required']">
+      Name is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Weight</mat-label>
+    <input matInput [(ngModel)]="data.weight" type="number" min="0" [step]="getStep()" #weight="ngModel" required />
+    <mat-error *ngIf="weight.errors?.['min']">
+      Weight cannot be negative.
+    </mat-error>
+     <mat-error *ngIf="weight.errors?.['required']">
+      Weight is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Symbol</mat-label>
+    <input matInput [(ngModel)]="data.symbol" #symbol="ngModel" required />
+    <mat-error *ngIf="symbol.errors?.['required']">
+      Symbol is required.
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-stroked-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-stroked-button color="primary" (click)="dialogRef.close(data)" [disabled]="position.invalid || weight.invalid || name.invalid || symbol.invalid">Save</button>
+</div> 
